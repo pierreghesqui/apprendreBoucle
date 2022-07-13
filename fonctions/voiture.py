@@ -3,34 +3,40 @@ import os
 import numpy as np
 import keyboard
 import pygame.mixer
-from fenetre import Fenetre
+from fonctions.fenetre import Fenetre
 import sys
+import imageio
+from IPython.display import Image
 
 class Voiture :
     
     def __init__(self, ligne=0,colonne=0, hauteur = 100, largeur = 100):
+        #Remove all images in tentative folder
+        dir = os.path.join('fonctions', 'tentative')
+        for f in os.listdir(dir):
+                os.remove(os.path.join(dir, f))
+        #===
         fenetre = Fenetre(1000,1000)
-        currentDirectory = os.getcwd()
-        f = open(os.path.join( currentDirectory,'arrierePlans','config.txt'),'r')
+        f = open(os.path.join( 'fonctions', 'arrierePlans','config.txt'),'r')
         lines = f.readlines()
         f.close()
         niveau = lines[-1]
         self.niveau = niveau
         test = 'ap_niveau'+ niveau
         test= test+'.png'
-        pathAP = os.path.join('arrierePlans',test)
+        pathAP = os.path.join('fonctions', 'arrierePlans',test)
         #print(pathAP)
         fenetre.mettreArrierePlan(pathAP)
         voiture1 = cv2.resize(cv2.imread(\
-            os.path.join('voiture','voiture1.png'))/255,(largeur,hauteur))
+            os.path.join('fonctions','voiture','voiture1.png'))/255,(largeur,hauteur))
         voiture2 = cv2.resize(cv2.imread(\
-            os.path.join('voiture','voiture2.png'))/255,(largeur,hauteur))
+            os.path.join('fonctions','voiture','voiture2.png'))/255,(largeur,hauteur))
         voiture3 = cv2.resize(cv2.imread(\
-            os.path.join('voiture','voiture3.png'))/255,(largeur,hauteur))
+            os.path.join('fonctions','voiture','voiture3.png'))/255,(largeur,hauteur))
         voiture4 = cv2.resize(cv2.imread(\
-            os.path.join('voiture','voiture4.png'))/255,(largeur,hauteur))
+            os.path.join('fonctions','voiture','voiture4.png'))/255,(largeur,hauteur))
         listeVoiture = [voiture1, voiture2, voiture3, voiture4]
-        
+        self.son =0
         self.surRoute = True
         self.listeImage = listeVoiture
         self.compteurImage = 1
@@ -38,7 +44,7 @@ class Voiture :
         self.largeur = largeur
         self.ligne = ligne
         self.colonne = colonne
-        self.vitesse = 10  #doit être un diviseur de 100
+        self.vitesse = 100  #doit être un diviseur de 100
         self.fenetre = fenetre
         self.position(ligne,colonne)
         
@@ -89,12 +95,12 @@ class Voiture :
             
         else:
             self.effacer()
-            while not keyboard.is_pressed('esc'):
-                cv2.putText(self.fenetre.image,"Tu es sorti de la page !", (125,550),\
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
-                cv2.putText(self.fenetre.image,"Modifie le code et retente ta chance", (200,650),\
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
-                self.fenetre.afficher()
+            #while not keyboard.is_pressed('esc'):
+            cv2.putText(self.fenetre.image,"Tu es sorti de la page !", (125,550),\
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(self.fenetre.image,"Modifie le code et retente ta chance", (200,650),\
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
+            self.fenetre.afficher()
             sys.exit()
            
             
@@ -108,12 +114,12 @@ class Voiture :
             self.position( self.ligne, self.colonne)
         except IndexError:
             self.effacer()
-            while not keyboard.is_pressed('esc'):
-                cv2.putText(self.fenetre.image,"Tu es sorti de la page !", (125,550),\
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
-                cv2.putText(self.fenetre.image,"Modifie le code et retente ta chance", (200,650),\
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
-                self.fenetre.afficher()
+            #while not keyboard.is_pressed('esc'):
+            cv2.putText(self.fenetre.image,"Tu es sorti de la page !", (125,550),\
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(self.fenetre.image,"Modifie le code et retente ta chance", (200,650),\
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
+            self.fenetre.afficher()
             sys.exit()
             
     def bougerVersLaGauche(self,vitesse=0):
@@ -125,12 +131,12 @@ class Voiture :
             self.position( self.ligne, self.colonne)
         else:
             self.effacer()
-            while not keyboard.is_pressed('esc'):
-                cv2.putText(self.fenetre.image,"Tu es sorti de la page !", (125,550),\
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
-                cv2.putText(self.fenetre.image,"Modifie le code et retente ta chance", (200,650),\
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
-                self.fenetre.afficher()
+            #while not keyboard.is_pressed('esc'):
+            cv2.putText(self.fenetre.image,"Tu es sorti de la page !", (125,550),\
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(self.fenetre.image,"Modifie le code et retente ta chance", (200,650),\
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
+            self.fenetre.afficher()
             sys.exit()
             
     def bougerVersLaDroite(self,vitesse=0):
@@ -143,12 +149,12 @@ class Voiture :
             self.position(self.ligne, self.colonne)
         except IndexError:
             self.effacer()
-            while not keyboard.is_pressed('esc'):
-                cv2.putText(self.fenetre.image,"Tu es sorti de la page !", (125,550),\
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
-                cv2.putText(self.fenetre.image,"Modifie le code et retente ta chance", (200,650),\
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
-                self.fenetre.afficher()
+            #while not keyboard.is_pressed('esc'):
+            cv2.putText(self.fenetre.image,"Tu es sorti de la page !", (125,550),\
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(self.fenetre.image,"Modifie le code et retente ta chance", (200,650),\
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
+            self.fenetre.afficher()
             sys.exit()
             
     def position(self,ligne,colonne):
@@ -179,39 +185,48 @@ class Voiture :
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
             pygame.mixer.init()
             pygame.mixer.music.set_volume(1)
-            sonPerdu= pygame.mixer.Sound(os.path.join('son','perdu.mp3'))
-            sonPerdu.play()
+            self.son= pygame.mixer.Sound(os.path.join('fonctions','son','perdu.mp3'))
             
         elif (self.fenetre.arrierePlan[self.ligne+10,self.colonne+10,0]>0.9 and
               self.fenetre.arrierePlan[self.ligne+10,self.colonne+10,1]>0.9 and
               self.fenetre.arrierePlan[self.ligne+10,self.colonne+10,2]>0.9):
             cv2.putText(self.fenetre.image,"Bravo !", (300,450),\
                         cv2.FONT_HERSHEY_SCRIPT_COMPLEX, 4, (0, 128, 0), 2, cv2.LINE_AA)
+            
+               
             niveauSuivant = str(int(self.niveau)+1)
             cv2.putText(self.fenetre.image,"Tu passes au niveau "+ niveauSuivant +" !!",\
                         (40,550), cv2.FONT_HERSHEY_COMPLEX_SMALL,3, (0, 255, 255), 2, cv2.LINE_AA)
             pygame.mixer.init()
-            sonGagne= pygame.mixer.Sound(os.path.join( 'son','victory.mp3'))
-            sonGagne.play()
-            currentDirectory = os.getcwd()
-            fichier = open(os.path.join( currentDirectory,'arrierePlans','config.txt'),'a')
+            self.son= pygame.mixer.Sound(os.path.join('fonctions', 'son','victory.mp3'))
+            
+            #==============NIVEAU SUIVANT================      
+            fichier = open(os.path.join( 'fonctions','arrierePlans','config.txt'),'a')
             self.niveau = str(int(self.niveau)+1)
             fichier.write("\n"+self.niveau)
             fichier.close()
-            self.fenetre.afficher()
-            cv2.waitKey(5000)
-            self.__init__()
+            
+            
         else :
             pygame.mixer.init()
             pygame.mixer.music.set_volume(1)
-            sonPerdu= pygame.mixer.Sound(os.path.join( 'son','perdu.mp3'))
-            sonPerdu.play()
+            self.son= pygame.mixer.Sound(os.path.join( 'fonctions','son','perdu.mp3'))
             cv2.putText(self.fenetre.image,"Appuie sur Echap pour fermer", (275,650),\
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
-        while not keyboard.is_pressed('esc'):
-                self.fenetre.afficher()
-                
-        self.fenetre.close()
+        
+        #while not keyboard.is_pressed('esc'):
+        for i in range(10):
+            self.fenetre.afficher()
+        pathList = os.listdir(os.path.join('fonctions','tentative'))
+           
+        with imageio.get_writer(os.path.join('fonctions','modelisation.gif'), mode='I', fps=2) as writer:
+            for i in range(len(pathList)):
+                path = os.path.join('fonctions','tentative','im_'+str(i)+'.png')
+                image = imageio.imread(path)
+                writer.append_data(image)
+        self.son.play()
+        Image(filename=os.path.join('fonctions','modelisation.gif'))
+        cv2.waitKey(5000)
         pygame.mixer.quit()
         
     def verifierSiRouteADroite(self):

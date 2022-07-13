@@ -1,2 +1,4 @@
-google-colab
-
+numpy
+opencv-python-headless
+matplotlib
+imageio

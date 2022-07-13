@@ -1,14 +1,13 @@
 import numpy as np
 import cv2
-from google.colab.patches import cv2_imshow
 import os
-#import tkinter  
 class Fenetre :
     def __init__(self,hauteur, largeur):
         self.hauteur = hauteur
         self.largeur = largeur
         self.image = np.zeros((hauteur,largeur))
         self.arrierePlan = []
+        self.imageNb = 0
         '''
         root = tkinter.Tk()
         width = root.winfo_screenwidth()
@@ -40,9 +39,8 @@ class Fenetre :
         cv2.imshow('mon image', self.image)
         cv2.waitKey(1)
         '''
-        cv2_imshow(self.image)
-        cv2.waitKey(1)
+        dir = os.path.join('fonctions', 'tentative','im_'+str(self.imageNb)+'.png')
+        cv2.imwrite(dir, self.image*255)
+        self.imageNb=self.imageNb+1
         
-        
-    def close(self):
-        cv2.destroyAllWindows()
+    
