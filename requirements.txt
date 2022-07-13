@@ -1,0 +1,6 @@
+google-colab
+pygame
+keyboard
+numpy
+opencv-python
+tkinter
