@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+from google.colab.patches import cv2_imshow
 import os
 import tkinter  
 class Fenetre :
@@ -28,10 +29,14 @@ class Fenetre :
         
         
     def afficher(self):
+        '''
         cv2.namedWindow('mon image', cv2.WINDOW_NORMAL)
         cv2.moveWindow('mon image', int(self.ecranLargeur/2),10)
         cv2.resizeWindow('mon image', int(self.ecranHauteur*0.75), int(self.ecranHauteur*0.75))
         cv2.imshow('mon image', self.image)
+        cv2.waitKey(1)
+        '''
+        cv2_imshow(self.image)
         cv2.waitKey(1)
         
     def close(self):
