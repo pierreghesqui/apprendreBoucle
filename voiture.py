@@ -10,7 +10,8 @@ class Voiture :
     
     def __init__(self, ligne=0,colonne=0, hauteur = 100, largeur = 100):
         fenetre = Fenetre(1000,1000)
-        f = open(os.path.join( 'arrierePlans','config.txt'),'r')
+        currentDirectory = os.getcwd()
+        f = open(os.path.join( currentDirectory,'arrierePlans','config.txt'),'r')
         lines = f.readlines()
         f.close()
         niveau = lines[-1]
@@ -192,7 +193,8 @@ class Voiture :
             pygame.mixer.init()
             sonGagne= pygame.mixer.Sound(os.path.join( 'son','victory.mp3'))
             sonGagne.play()
-            fichier = open(os.path.join( 'arrierePlans','config.txt'),'a')
+            currentDirectory = os.getcwd()
+            fichier = open(os.path.join( currentDirectory,'arrierePlans','config.txt'),'a')
             self.niveau = str(int(self.niveau)+1)
             fichier.write("\n"+self.niveau)
             fichier.close()

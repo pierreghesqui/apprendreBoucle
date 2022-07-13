@@ -9,12 +9,16 @@ class Fenetre :
         self.largeur = largeur
         self.image = np.zeros((hauteur,largeur))
         self.arrierePlan = []
-        #root = tkinter.Tk()
-        #width = root.winfo_screenwidth()
-        #height = root.winfo_screenheight()
-        #root.destroy()
-        #self.ecranLargeur = width
-        #self.ecranHauteur = height
+        '''
+        root = tkinter.Tk()
+        width = root.winfo_screenwidth()
+        height = root.winfo_screenheight()
+        root.destroy()
+        self.ecranLargeur = width
+        self.ecranHauteur = height
+        '''
+        self.ecranLargeur = 200
+        self.ecranHauteur = 200
         
     def mettreArrierePlan(self, path):
         print(path)
@@ -38,6 +42,7 @@ class Fenetre :
         '''
         cv2_imshow(self.image)
         cv2.waitKey(1)
+        
         
     def close(self):
         cv2.destroyAllWindows()
