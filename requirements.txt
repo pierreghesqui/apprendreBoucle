@@ -3,4 +3,3 @@ pygame
 keyboard
 numpy
 opencv-python
-tkinter
