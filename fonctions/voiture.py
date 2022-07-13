@@ -1,7 +1,6 @@
 import cv2
 import os
 import numpy as np
-import keyboard
 import pygame.mixer
 from fonctions.fenetre import Fenetre
 import sys
