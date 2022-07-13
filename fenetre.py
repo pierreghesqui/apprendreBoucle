@@ -2,19 +2,19 @@ import numpy as np
 import cv2
 from google.colab.patches import cv2_imshow
 import os
-import tkinter  
+#import tkinter  
 class Fenetre :
     def __init__(self,hauteur, largeur):
         self.hauteur = hauteur
         self.largeur = largeur
         self.image = np.zeros((hauteur,largeur))
         self.arrierePlan = []
-        root = tkinter.Tk()
-        width = root.winfo_screenwidth()
-        height = root.winfo_screenheight()
-        root.destroy()
-        self.ecranLargeur = width
-        self.ecranHauteur = height
+        #root = tkinter.Tk()
+        #width = root.winfo_screenwidth()
+        #height = root.winfo_screenheight()
+        #root.destroy()
+        #self.ecranLargeur = width
+        #self.ecranHauteur = height
         
     def mettreArrierePlan(self, path):
         print(path)
