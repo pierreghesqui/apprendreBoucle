@@ -29,4 +29,4 @@ class Fenetre :
         #afficher l'image avec Ipython.display
         dispImg = display.Image(dir,width = 400, height = 400)
         display.update_display(dispImg,display_id='essai')
-        time.sleep(0.1)
+        time.sleep(0.2)

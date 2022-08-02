@@ -46,7 +46,7 @@ class Voiture :
         self.largeur = largeur
         self.ligne = ligne
         self.colonne = colonne
-        self.vitesse = 25  #doit être un diviseur de 100
+        self.vitesse = 100  #doit être un diviseur de 100
         self.fenetre = fenetre
         self.position(ligne,colonne)
         
@@ -79,12 +79,13 @@ class Voiture :
         self.compteurImage = (self.compteurImage-1)%4
         self.position(self.ligne,self.colonne)
         self.hauteur,self.largeur=self.largeur,self.hauteur
+        self.fenetre.afficher()
     def tournerADroite(self):
         self.effacer()
         self.compteurImage = (self.compteurImage+1)%4
         self.position(self.ligne,self.colonne)
         self.hauteur,self.largeur=self.largeur,self.hauteur
-
+        self.fenetre.afficher()
     def bougerVersLeHaut(self,vitesse=0):
         if vitesse ==0:
             vitesse =self.vitesse
@@ -197,8 +198,8 @@ class Voiture :
             
                
             niveauSuivant = str(int(self.niveau)+1)
-            cv2.putText(self.fenetre.image,"Tu passes au niveau "+ niveauSuivant +" !!",\
-                        (40,550), cv2.FONT_HERSHEY_COMPLEX_SMALL,3, (0, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(self.fenetre.image,"Tu peux passer au niveau "+ niveauSuivant +" !",\
+                        (35,550), cv2.FONT_HERSHEY_COMPLEX_SMALL,2.5, (0, 255, 255), 2, cv2.LINE_AA)
             
             #self.son= pygame.mixer.Sound(os.path.join('fonctions', 'son','victory.mp3'))
             '''
@@ -210,11 +211,12 @@ class Voiture :
             '''
             
         else :
-            pygame.mixer.init()
-            pygame.mixer.music.set_volume(1)
+            
             #self.son= pygame.mixer.Sound(os.path.join( 'fonctions','son','perdu.mp3'))
-            cv2.putText(self.fenetre.image,"Appuie sur Echap pour fermer", (275,650),\
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(self.fenetre.image," Echec du niveau"+self.niveau+" ! ", (20,650),\
+                        cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(self.fenetre.image," Essaie Encore...", (20,725),\
+                    cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 255), 2, cv2.LINE_AA)
         self.fenetre.afficher()
         '''
         for i in range(10):
