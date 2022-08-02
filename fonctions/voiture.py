@@ -46,7 +46,7 @@ class Voiture :
         self.largeur = largeur
         self.ligne = ligne
         self.colonne = colonne
-        self.vitesse = 100  #doit être un diviseur de 100
+        self.vitesse = 25  #doit être un diviseur de 100
         self.fenetre = fenetre
         self.position(ligne,colonne)
         
