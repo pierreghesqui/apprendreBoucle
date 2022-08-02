@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+import time
 import os
 import IPython.display as display
 class Fenetre :
@@ -28,4 +29,4 @@ class Fenetre :
         #afficher l'image avec Ipython.display
         dispImg = display.Image(dir,width = 400, height = 400)
         display.update_display(dispImg,display_id='essai')
-        cv2.waitKey(1)
+        time.sleep(0.1)
