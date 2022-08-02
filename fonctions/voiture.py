@@ -1,11 +1,11 @@
 import cv2
 import os
 import numpy as np
-import pygame.mixer
+#import pygame.mixer
 from fonctions.fenetre import Fenetre
 import sys
 import imageio
-from IPython.display import Image
+from IPython.display import Image, display
 
 class Voiture :
     
@@ -24,7 +24,6 @@ class Voiture :
         test = 'ap_niveau'+ niveau
         test= test+'.png'
         pathAP = os.path.join('fonctions', 'arrierePlans',test)
-        #print(pathAP)
         fenetre.mettreArrierePlan(pathAP)
         voiture1 = cv2.resize(cv2.imread(\
             os.path.join('fonctions','voiture','voiture1.png'))/255,(largeur,hauteur))
@@ -35,7 +34,7 @@ class Voiture :
         voiture4 = cv2.resize(cv2.imread(\
             os.path.join('fonctions','voiture','voiture4.png'))/255,(largeur,hauteur))
         listeVoiture = [voiture1, voiture2, voiture3, voiture4]
-        self.son =0
+        #self.son =0
         self.surRoute = True
         self.listeImage = listeVoiture
         self.compteurImage = 1
@@ -55,7 +54,6 @@ class Voiture :
         return coord
     
     def avancer(self):
-        #print(self.compteurImage)
         if self.compteurImage == 0:
             for i in range(0,self.hauteur//self.vitesse):
                 self.bougerVersLeHaut()   
@@ -175,8 +173,6 @@ class Voiture :
         return sortie
     
     def verifierMission(self):
-        #print(self.ligne,self.colonne)
-        #print(self.fenetre.arrierePlan[self.ligne+50,self.colonne+50,2])
         if self.surRoute ==False:
             cv2.putText(self.fenetre.image,"Tu es sorti de la route !", (125,450),\
                         cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 255), 2,cv2.LINE_AA)
@@ -184,7 +180,7 @@ class Voiture :
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
             pygame.mixer.init()
             pygame.mixer.music.set_volume(1)
-            self.son= pygame.mixer.Sound(os.path.join('fonctions','son','perdu.mp3'))
+            #self.son= pygame.mixer.Sound(os.path.join('fonctions','son','perdu.mp3'))
             
         elif (self.fenetre.arrierePlan[self.ligne+10,self.colonne+10,0]>0.9 and
               self.fenetre.arrierePlan[self.ligne+10,self.colonne+10,1]>0.9 and
@@ -197,19 +193,19 @@ class Voiture :
             cv2.putText(self.fenetre.image,"Tu passes au niveau "+ niveauSuivant +" !!",\
                         (40,550), cv2.FONT_HERSHEY_COMPLEX_SMALL,3, (0, 255, 255), 2, cv2.LINE_AA)
             pygame.mixer.init()
-            self.son= pygame.mixer.Sound(os.path.join('fonctions', 'son','victory.mp3'))
+            #self.son= pygame.mixer.Sound(os.path.join('fonctions', 'son','victory.mp3'))
             
             #==============NIVEAU SUIVANT================      
             fichier = open(os.path.join( 'fonctions','arrierePlans','config.txt'),'a')
             self.niveau = str(int(self.niveau)+1)
             fichier.write("\n"+self.niveau)
             fichier.close()
-            
+        
             
         else :
             pygame.mixer.init()
             pygame.mixer.music.set_volume(1)
-            self.son= pygame.mixer.Sound(os.path.join( 'fonctions','son','perdu.mp3'))
+            #self.son= pygame.mixer.Sound(os.path.join( 'fonctions','son','perdu.mp3'))
             cv2.putText(self.fenetre.image,"Appuie sur Echap pour fermer", (275,650),\
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
         
@@ -223,8 +219,10 @@ class Voiture :
                 path = os.path.join('fonctions','tentative','im_'+str(i)+'.png')
                 image = imageio.imread(path)
                 writer.append_data(image)
-        self.son.play()
-        Image(filename=os.path.join('fonctions','modelisation.gif'))
+        
+        #self.son.play()
+        
+        display(Image(filename=os.path.join('fonctions','modelisation.gif'),width = 400, height = 400))
         cv2.waitKey(5000)
         pygame.mixer.quit()
         
@@ -292,7 +290,6 @@ class Voiture :
              not (self.fenetre.arrierePlan[self.ligne+10,self.colonne+150,0]>0.90 and
                   self.fenetre.arrierePlan[self.ligne+10,self.colonne+150,1]>0.90 and
                   self.fenetre.arrierePlan[self.ligne+10,self.colonne+150,2]>0.90)):
-                print()
                 reponse = False    
         elif  self.compteurImage ==0:
             if (not ( 0.49 <self.fenetre.arrierePlan[self.ligne+50,self.colonne-50,0]<0.51 and 
@@ -306,16 +303,15 @@ class Voiture :
 
         
     def verifierSiOnEstSurRoute(self):
-        #print(self.ligne,self.colonne)
         if (not ( 0.49 <self.fenetre.arrierePlan[self.ligne+50,self.colonne+50,0]<0.51 and 
               0.49 <self.fenetre.arrierePlan[self.ligne+50,self.colonne+50,1] <0.51 and 
               0.49 <self.fenetre.arrierePlan[self.ligne+50,self.colonne+50,2] <0.51) and
              not (self.fenetre.arrierePlan[self.ligne+10,self.colonne+50,0]>0.90 and
                   self.fenetre.arrierePlan[self.ligne+10,self.colonne+50,1]>0.90 and
                   self.fenetre.arrierePlan[self.ligne+10,self.colonne+50,2]>0.90)):
-            #print(self.fenetre.arrierePlan[self.ligne+10,self.colonne+50])
+            
             self.surRoute = False
-            #print(self.surRoute )
+            
     
     def estSurParking(self):
         reponse = False
