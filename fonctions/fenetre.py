@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 import os
-from IPython.display import Image, displays
+from IPython.display import Image, display
 class Fenetre :
     def __init__(self,hauteur, largeur):
         self.hauteur = hauteur
