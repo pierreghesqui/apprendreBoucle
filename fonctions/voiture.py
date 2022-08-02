@@ -8,7 +8,7 @@ import imageio
 
 class Voiture :
     
-    def __init__(self,niveau ligne=0,colonne=0, hauteur = 100, largeur = 100):
+    def __init__(self,niveau, ligne=0,colonne=0, hauteur = 100, largeur = 100):
         '''
         #Remove all images in tentative folder
         dir = os.path.join('fonctions', 'tentative')
