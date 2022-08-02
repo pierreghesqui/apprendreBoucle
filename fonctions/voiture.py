@@ -9,11 +9,13 @@ import imageio
 class Voiture :
     
     def __init__(self, ligne=0,colonne=0, hauteur = 100, largeur = 100):
+        '''
         #Remove all images in tentative folder
         dir = os.path.join('fonctions', 'tentative')
         for f in os.listdir(dir):
                 os.remove(os.path.join(dir, f))
         #===
+        '''
         fenetre = Fenetre(1000,1000)
         f = open(os.path.join( 'fonctions', 'arrierePlans','config.txt'),'r')
         lines = f.readlines()
