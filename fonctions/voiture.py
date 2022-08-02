@@ -8,7 +8,7 @@ import imageio
 
 class Voiture :
     
-    def __init__(self, ligne=0,colonne=0, hauteur = 100, largeur = 100):
+    def __init__(self,niveau, ligne=0,colonne=0, hauteur = 100, largeur = 100):
         '''
         #Remove all images in tentative folder
         dir = os.path.join('fonctions', 'tentative')
@@ -17,10 +17,12 @@ class Voiture :
         #===
         '''
         fenetre = Fenetre(1000,1000)
+        '''
         f = open(os.path.join( 'fonctions', 'arrierePlans','config.txt'),'r')
         lines = f.readlines()
         f.close()
         niveau = lines[-1]
+        '''
         self.niveau = niveau
         test = 'ap_niveau'+ niveau
         test= test+'.png'
@@ -198,13 +200,13 @@ class Voiture :
                         (40,550), cv2.FONT_HERSHEY_COMPLEX_SMALL,3, (0, 255, 255), 2, cv2.LINE_AA)
             
             #self.son= pygame.mixer.Sound(os.path.join('fonctions', 'son','victory.mp3'))
-            
+            '''
             #==============NIVEAU SUIVANT================      
             fichier = open(os.path.join( 'fonctions','arrierePlans','config.txt'),'a')
             self.niveau = str(int(self.niveau)+1)
             fichier.write("\n"+self.niveau)
             fichier.close()
-        
+            '''
             
         else :
             pygame.mixer.init()
