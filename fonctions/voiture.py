@@ -8,7 +8,7 @@ import imageio
 
 class Voiture :
     
-    def __init__(self,niveau, ligne=0,colonne=0, hauteur = 100, largeur = 100):
+    def __init__(self,niveau ligne=0,colonne=0, hauteur = 100, largeur = 100):
         '''
         #Remove all images in tentative folder
         dir = os.path.join('fonctions', 'tentative')
@@ -23,7 +23,8 @@ class Voiture :
         f.close()
         niveau = lines[-1]
         '''
-        self.niveau = str(niveau)
+        niveau = str(niveau)
+        self.niveau = niveau
         test = 'ap_niveau'+ niveau
         test= test+'.png'
         pathAP = os.path.join('fonctions', 'arrierePlans',test)
