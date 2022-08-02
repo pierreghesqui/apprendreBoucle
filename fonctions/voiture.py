@@ -5,7 +5,6 @@ import numpy as np
 from fonctions.fenetre import Fenetre
 import sys
 import imageio
-from IPython.display import Image, display
 
 class Voiture :
     
