@@ -23,7 +23,7 @@ class Voiture :
         f.close()
         niveau = lines[-1]
         '''
-        self.niveau = niveau
+        self.niveau = str(niveau)
         test = 'ap_niveau'+ niveau
         test= test+'.png'
         pathAP = os.path.join('fonctions', 'arrierePlans',test)
