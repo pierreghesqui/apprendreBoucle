@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import os
+from IPython.display import Image, displays
 class Fenetre :
     def __init__(self,hauteur, largeur):
         self.hauteur = hauteur
@@ -10,7 +11,8 @@ class Fenetre :
         self.imageNb = 0
         self.ecranLargeur = 200
         self.ecranHauteur = 200
-        
+        d=display.display('test', display_id='essai')
+
     def mettreArrierePlan(self, path):
         bg = cv2.imread(path)/255
         bg = cv2.resize(bg,(self.largeur,self.hauteur))
@@ -20,8 +22,10 @@ class Fenetre :
         
         
     def afficher(self):
-        dir = os.path.join('fonctions', 'tentative','im_'+str(self.imageNb)+'.png')
+        dir = os.path.join('fonctions', 'tentative','im'+'.png')
         cv2.imwrite(dir, self.image*255)
         self.imageNb=self.imageNb+1
-        
-    
+        #afficher l'image avec Ipython.display
+        dispImg = display.Image(dir,width = 400, height = 400)
+        display.update_display(dispImg,display_id='essai')
+        cv2.waitKey(1)

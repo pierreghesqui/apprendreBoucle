@@ -48,7 +48,6 @@ class Voiture :
         
         cv2.putText(self.fenetre.image,"Niveau "+self.niveau, (325,920),\
                         cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, 3, (255, 0, 255), 2, cv2.LINE_AA)
-        
     def getCoord(self):
         coord = np.where( self.listeImage[self.compteurImage] != [0,0,0] )
         return coord
@@ -173,13 +172,15 @@ class Voiture :
         return sortie
     
     def verifierMission(self):
+        pygame.mixer.init()
+        pygame.mixer.music.set_volume(1)
         if self.surRoute ==False:
             cv2.putText(self.fenetre.image,"Tu es sorti de la route !", (125,450),\
                         cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 255), 2,cv2.LINE_AA)
             cv2.putText(self.fenetre.image,"Modifie le code et retente ta chance", (200,650),\
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
-            pygame.mixer.init()
-            pygame.mixer.music.set_volume(1)
+            
+            
             #self.son= pygame.mixer.Sound(os.path.join('fonctions','son','perdu.mp3'))
             
         elif (self.fenetre.arrierePlan[self.ligne+10,self.colonne+10,0]>0.9 and
@@ -192,7 +193,7 @@ class Voiture :
             niveauSuivant = str(int(self.niveau)+1)
             cv2.putText(self.fenetre.image,"Tu passes au niveau "+ niveauSuivant +" !!",\
                         (40,550), cv2.FONT_HERSHEY_COMPLEX_SMALL,3, (0, 255, 255), 2, cv2.LINE_AA)
-            pygame.mixer.init()
+            
             #self.son= pygame.mixer.Sound(os.path.join('fonctions', 'son','victory.mp3'))
             
             #==============NIVEAU SUIVANT================      
@@ -208,8 +209,8 @@ class Voiture :
             #self.son= pygame.mixer.Sound(os.path.join( 'fonctions','son','perdu.mp3'))
             cv2.putText(self.fenetre.image,"Appuie sur Echap pour fermer", (275,650),\
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
-        
-        #while not keyboard.is_pressed('esc'):
+        self.fenetre.afficher()
+        '''
         for i in range(10):
             self.fenetre.afficher()
         pathList = os.listdir(os.path.join('fonctions','tentative'))
@@ -225,7 +226,7 @@ class Voiture :
         display(Image(filename=os.path.join('fonctions','modelisation.gif'),width = 400, height = 400))
         cv2.waitKey(5000)
         pygame.mixer.quit()
-        
+        '''
     def verifierSiRouteADroite(self):
         reponse = True
         if self.compteurImage ==1:
