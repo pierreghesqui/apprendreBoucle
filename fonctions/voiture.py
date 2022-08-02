@@ -173,8 +173,10 @@ class Voiture :
         return sortie
     
     def verifierMission(self):
+        '''
         pygame.mixer.init()
         pygame.mixer.music.set_volume(1)
+        '''
         if self.surRoute ==False:
             cv2.putText(self.fenetre.image,"Tu es sorti de la route !", (125,450),\
                         cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 255), 2,cv2.LINE_AA)
